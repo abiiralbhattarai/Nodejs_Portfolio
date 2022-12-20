@@ -38,4 +38,28 @@ router.post("/", (req, res) => {
   res.json(users);
 });
 
+//Update User
+
+router.put("/:id", (req, res) => {
+  const found = users.some((user) => user.id === parseInt(req.params.id));
+
+  if (found) {
+    const updateUser = req.body;
+
+    users.forEach((user) => {
+      if (user.id === parseInt(req.params.id)) {
+        user.name = updateUser.name ? updateUser.name : user.name;
+
+        user.email = updateUser.email ? updateUser.email : user.email;
+
+        res.json({ msg: "User updated", user });
+      }
+    });
+  } else {
+    res.sendStatus(400);
+  }
+});
+
+
+
 module.exports = router;
