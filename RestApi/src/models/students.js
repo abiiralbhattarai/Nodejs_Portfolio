@@ -20,7 +20,6 @@ const studentSchema = new mongoose.Schema({
   phone: {
     type: Number,
     min: 10,
-    max: 10,
     required: true,
   },
   address: {
@@ -31,6 +30,6 @@ const studentSchema = new mongoose.Schema({
 
 //creating new collection
 
-const Student = new mongoose.model('Student',studentSchema);
+const Student = new mongoose.model("Student", studentSchema);
 
 module.exports = Student;

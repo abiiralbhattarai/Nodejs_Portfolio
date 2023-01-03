@@ -16,8 +16,15 @@ app.get("/students", (req, res) => {
 //create a new students
 app.post("/students", (req, res) => {
   console.log(req.body);
-  const user = new Student(req.body)
-  res.send("Hello");
+  const user = new Student(req.body);
+  user
+    .save()
+    .then(() => {
+      res.send(user);
+    })
+    .catch((e) => {
+      res.send(e);
+    });
 });
 app.listen(port, () => {
   console.log(`connection is setup at ${port}`);
