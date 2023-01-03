@@ -50,16 +50,30 @@ app.post("/holiday", async (req, res) => {
 
 //get the student data
 
-app.get("/students",async(req,res)=>{
-  try{
+app.get("/students", async (req, res) => {
+  try {
     const studentsData = await Student.find();
     res.status(200).send(studentsData);
-  }catch(e){
-    res.status(400).send(e)
+  } catch (e) {
+    res.status(400).send(e);
   }
+});
 
+//get the student data by id
 
-})
+app.get("/students/:id", async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const studentsData = await Student.findById(_id);
+    if (!studentsData) {
+      return res.status(404).send();
+    } else {
+      res.send(studentsData);
+    }
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
 
 app.listen(port, () => {
   console.log(`connection is setup at ${port}`);
