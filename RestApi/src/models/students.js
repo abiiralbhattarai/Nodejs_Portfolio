@@ -30,6 +30,6 @@ const studentSchema = new mongoose.Schema({
 
 //creating new collection
 
-const Student = new mongoose.model("Student", studentSchema);
+const Students = new mongoose.model("Student", studentSchema);
 
-module.exports = Student;
+module.exports = Students;
