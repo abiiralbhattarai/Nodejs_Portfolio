@@ -1,6 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const Student = require("../models/students");
+
 //create a new students
 /*router.post("/students", (req, res) => {
   console.log(req.body);

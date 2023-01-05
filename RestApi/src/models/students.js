@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
 
 const studentSchema = new mongoose.Schema({
   name: {
@@ -26,10 +27,23 @@ const studentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
 });
 
+//securing the password
+
+studentSchema.pre("save", async function (next) {
+  if (this.isModified("password")) {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
+
+  next();
+});
 //creating new collection
 
-const Students = new mongoose.model("Student", studentSchema);
+const Students = new mongoose.model("StudentData", studentSchema);
 
 module.exports = Students;
